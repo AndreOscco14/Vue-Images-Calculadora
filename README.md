@@ -22,3 +22,8 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Vuex (Redux to Vue)
+npm install vuex
+
+-> Configurar el store, crear en src (store.js) para configuración de Vuex

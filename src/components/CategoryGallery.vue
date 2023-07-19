@@ -25,7 +25,7 @@
   </div>
 </template>
 
-<script>
+<!-- <script>
 export default {
   data() {
     return {
@@ -50,6 +50,25 @@ export default {
       this.displayValue = "";
       console.log("Pantalla Vacia")
     },
+  },
+};
+</script> -->
+
+<script>
+import { mapState, mapActions } from 'vuex';
+
+export default {
+  computed: {
+    ...mapState({
+      displayValue: (state) => state.calculatorDisplay,
+    }),
+  },
+  methods: {
+    ...mapActions([
+      'appendToDisplay',
+      'calculate',
+      'clearDisplay',
+    ]),
   },
 };
 </script>
@@ -94,66 +113,4 @@ button {
   justify-content: center;
   align-items: center;
 }
-
 </style>
-
-
-<!-- <template>
-    <div>
-      <h1>Buscar: {{ categoryName }}</h1>
-      <div class="image-list">
-        <image-card v-for="image in images" :key="image.id" :image="image"></image-card>
-      </div>
-    </div>
-  </template>
-  
-  <script>
-  import axios from 'axios';
-  import ImageCard from './ImageCard.vue';
-  
-  export default {
-    components: {
-      ImageCard,
-    },
-    props: {
-      categoryName: String,
-    },
-    data() {
-      return {
-        images: [],
-      };
-    },
-    created() {
-      this.loadCategoryImages();
-    },
-    watch: {
-      categoryName: 'loadCategoryImages',
-    },
-    methods: {
-      async loadCategoryImages() {
-        try {
-          const response = await axios.get('https://api.unsplash.com/search/photos', {
-            params: {
-              query: this.categoryName,
-              per_page: 10,
-              client_id: 'mxpeGUWU6H8SXAhOadAewFSAmqIvWz0qZH0Bo6pdBK4',
-            },
-          });
-          this.images = response.data.results;
-        } catch (error) {
-          console.error(error);
-        }
-      },
-    },
-  };
-  </script>
-  
-  <style>
-  .image-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 20px;
-  }
-  </style>
-   -->
-
