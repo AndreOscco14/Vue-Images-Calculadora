@@ -14,6 +14,7 @@ const store = createStore({
     // Las mutaciones son funciones que modifican el estado de la aplicación de
     //  forma síncrona. Se utilizan para actualizar el estado en respuesta a acciones 
     // realizadas por los componentes.
+    
     setCalculatorDisplay(state, displayValue) {
       state.calculatorDisplay = displayValue;
      const resp = displayValue
