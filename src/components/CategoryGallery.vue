@@ -58,6 +58,9 @@ export default {
 import { mapState, mapActions } from 'vuex';
 
 export default {
+  // Computed para acceder al estado de 'calculatorDisplay' almacenado en Vuex y 
+  // mapearlo al componente actual. En Vuex, el estado global está disponible en el store,
+  //  pero para acceder a él desde un componente, necesitas utilizar computed para hacer la conexión.
   computed: {
     ...mapState({
       displayValue: (state) => state.calculatorDisplay,
@@ -72,6 +75,22 @@ export default {
   },
 };
 </script>
+
+<!-- el uso del spread operator antes de mapState y mapActions es una 
+  forma de simplificar y abreviar el código al propagar las propiedades 
+  y métodos del almacenamiento Vuex al componente de manera más limpia y concisa. -->
+
+   <!-- computed: {
+    displayValue: mapState({
+      displayValue: (state) => state.calculatorDisplay,
+    }),
+  },
+
+  methods: {
+    appendToDisplay: mapActions(['appendToDisplay']),
+    calculate: mapActions(['calculate']),
+    clearDisplay: mapActions(['clearDisplay']),
+  }, -->
 
 <style>
 .calculator {
