@@ -25,35 +25,6 @@
   </div>
 </template>
 
-<!-- <script>
-export default {
-  data() {
-    return {
-      displayValue: "",
-    };
-  },
-  methods: {
-    appendToDisplay(value) {
-      this.displayValue += value;
-      console.log(this.displayValue)
-    },
-    calculate() {
-      try {
-        this.displayValue = eval(this.displayValue);
-        const result = eval(this.displayValue);
-        console.log(result)
-      } catch (error) {
-        this.displayValue = "Error";
-      }
-    },
-    clearDisplay() {
-      this.displayValue = "";
-      console.log("Pantalla Vacia")
-    },
-  },
-};
-</script> -->
-
 <script>
 import { mapState, mapActions } from 'vuex';
 
