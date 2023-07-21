@@ -26,7 +26,7 @@
                 <th>Content</th>
                 </tr>
             </thead>
-            <tbody>
+            <!-- <tbody>
                 <tr v-for="post in datos" :key="post.id">
                 <td>{{ post.title }}</td>
                 <td>{{ post.author }}</td>
@@ -36,7 +36,33 @@
                     <button class="actualizar" @click="updatePost(post)">Actualizar</button>
                 </td>
                 </tr>
-            </tbody>
+            </tbody> -->
+
+            <tbody>
+          <tr v-for="post in datos" :key="post.id">
+            <td>
+              <input v-if="post.editing" v-model="post.title" />
+              <span v-else>{{ post.title }}</span>
+            </td>
+            <td>
+              <input v-if="post.editing" v-model="post.author" />
+              <span v-else>{{ post.author }}</span>
+            </td>
+            <td>
+              <textarea v-if="post.editing" v-model="post.content"></textarea>
+              <span v-else>{{ post.content }}</span>
+            </td>
+            <td>
+              <template v-if="!post.editing">
+                <button class="editar" @click="editPost(post)">Editar</button>
+                <button class="eliminar" @click="deletePost(post.id)">Eliminar</button>
+              </template>
+              <template v-else>
+                <button class="actualizar" @click="updatePost(post)">Actualizar</button>
+              </template>
+            </td>
+          </tr>
+        </tbody>
         </table>
         </div>
     </div>
@@ -70,6 +96,7 @@
           this.post.title = '';
           this.post.author = '';
           this.post.content = '';
+          this.getPosts()
         } catch (error) {
           console.error('Error adding post:', error);
         }
@@ -110,6 +137,11 @@
       } catch (error) {
         console.error('Error updating post:', error);
       }
+    },
+
+    // EDITAR
+    editPost(post) {
+      post.editing = true;
     },
    },
   };
