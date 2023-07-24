@@ -26,17 +26,6 @@
                 <th>Content</th>
                 </tr>
             </thead>
-            <!-- <tbody>
-                <tr v-for="post in datos" :key="post.id">
-                <td>{{ post.title }}</td>
-                <td>{{ post.author }}</td>
-                <td>{{ post.content }}</td>
-                <td>
-                    <button class="eliminar" style="margin-right: 3px;" @click="deletePost(post.id)">Eliminar</button>
-                    <button class="actualizar" @click="updatePost(post)">Actualizar</button>
-                </td>
-                </tr>
-            </tbody> -->
 
             <tbody>
           <tr v-for="post in datos" :key="post.id">
@@ -49,7 +38,7 @@
               <span v-else>{{ post.author }}</span>
             </td>
             <td>
-              <textarea v-if="post.editing" v-model="post.content"></textarea>
+              <input v-if="post.editing" v-model="post.content"/>
               <span v-else>{{ post.content }}</span>
             </td>
             <td>
@@ -87,11 +76,12 @@
       this.getPosts()
     },
     methods: {
+      // GUARDAR
       async submitPost() {
         try {
           console.log(this.post);
           await axios.post('http://localhost:8000/posts', this.post);
-          alert('Post added successfully!');
+          // alert('Post added successfully!');
           // Limpiar el formulario después de enviar los datos
           this.post.title = '';
           this.post.author = '';
@@ -102,12 +92,12 @@
         }
       },
 
-    // GUARDAR
+    // MOSTRAR DATOS
       async getPosts() {
       try {
         const response = await axios.get('http://localhost:8000/posts');
         this.datos = response.data;
-        console.log(response.data)
+        console.log("Datos guardados",response.data)
       } catch (error) {
         console.error('Error fetching posts:', error);
       }
@@ -118,7 +108,7 @@
       try {
         await axios.delete(`http://localhost:8000/posts/${postId}`);
         this.getPosts(); // Actualizar la lista después de eliminar el post
-        alert('Post deleted successfully!');
+        // alert('Post deleted successfully!');
       } catch (error) {
         console.error('Error deleting post:', error);
       }
@@ -133,7 +123,7 @@
         this.post.content = post.content;
         await axios.put(`http://localhost:8000/posts/${post.id}`, this.post);
         this.getPosts(); // Actualizar la lista después de actualizar el post
-        alert('Post updated successfully!');
+        // alert('Post updated successfully!');
       } catch (error) {
         console.error('Error updating post:', error);
       }
@@ -217,7 +207,7 @@ textarea {
     background-color:  #c20f0f92;
 }
 
-.actualizar{
+.actualizar {
   background-color: #0f4ade86;
   color: white;
   border: none;
@@ -233,6 +223,20 @@ textarea {
 .actualizar:hover{
     background-color:  #2767f192;
 }
+
+.editar{
+  background-color: #0f4ade86;
+  color: white;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  float: right;
+}
+
 
 .table-container {
   margin-top: 20px;
