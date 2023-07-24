@@ -9,7 +9,7 @@
             <input type="text" class="spaces" id="author" v-model="post.author" required placeholder="Author"/>
         </div>
         <div>
-            <textarea id="content" class="spaces" v-model="post.content" required placeholder="Contenido"></textarea>
+            <input id="content" class="spaces" v-model="post.content" required placeholder="Contenido"/>
         </div>
         <div>
             <button class="buttonGuardar" type="submit">Guardar</button>
@@ -58,8 +58,89 @@
   </template>
   
   <script>
-  import axios from 'axios';
+  import { defineComponent, computed } from 'vue';
+  import { setupStore } from '../store';
+
+  export default defineComponent({
+    setup() {
+      const store = setupStore();
+      const post = store.post;
+      // const datos = store.datos
+      const datos = computed(() => store.datos);
+
+      console.log("Datos from Store",datos)
+      // Método para cargar los datos al inicio
+      const loadPosts = () => {
+        try {
+         store.getPosts();
+        } catch (error) {
+          console.error('Error fetching posts:', error);
+        }
+      };
+
+        const editPost = (post) => {
+        post.editing = true;
+        };
+
+      // Ejecutamos el método para cargar los datos al inicio
+      loadPosts();
+
   
+      const submitPost = async () => {
+        try {
+          await store.submitPost(post);
+          post.title = '';
+          post.author = '';
+          post.content = '';
+        } catch (error) {
+          console.error('Error adding post:', error);
+        }
+      };
+  
+
+      const updatePost = async (post) => {
+      try {
+        await store.updatePost(post);
+        post.editing = false;
+      } catch (error) {
+        console.error('Error updating post:', error);
+      }
+    };
+
+    const deletePost = async (postId) => {
+      try {
+        await store.deletePost(postId);
+        console.log("Datos eliminados")
+      } catch (error) {
+        console.error('Error deleting post:', error);
+      }
+    };
+
+    // const datos = computed(() => {
+    //   try {
+    //     store.getPosts()
+    //   } catch (error) {
+    //     console.error('Error datos Computing'. error)
+    //   }
+    // })
+
+      return {
+        post,
+        datos,
+        submitPost,
+        editPost,
+        updatePost,
+        deletePost
+      };
+    },
+  });
+  </script>
+  
+
+  <!-- <script>
+  import axios from 'axios';
+  // import { useStore } from 'pinia'; // Importa el hook useStore
+
   export default {
     data() {
       return {
@@ -135,7 +216,7 @@
     },
    },
   };
-  </script>
+  </script> -->
 
 <style>
 .container {

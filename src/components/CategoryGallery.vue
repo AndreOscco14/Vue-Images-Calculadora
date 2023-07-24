@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="calculator-container">
     <div class="calculator">
       <div class="display">{{ displayValue }}</div>
@@ -23,9 +23,16 @@
       </div>
     </div>
   </div>
+</template> -->
+
+<template>
+  <h1>Sin Vuex</h1>
 </template>
 
 <script>
+</script>
+
+<!-- <script>
 import { mapState, mapActions } from 'vuex';
 
 export default {
@@ -45,7 +52,7 @@ export default {
     ]),
   },
 };
-</script>
+</script> -->
 
 <!-- el uso del spread operator antes de mapState y mapActions es una 
   forma de simplificar y abreviar el código al propagar las propiedades 
@@ -62,7 +69,7 @@ export default {
     calculate: mapActions(['calculate']),
     clearDisplay: mapActions(['clearDisplay']),
   }, -->
-
+<!-- 
 <style>
 .calculator {
   width: 300px;
@@ -103,4 +110,4 @@ button {
   justify-content: center;
   align-items: center;
 }
-</style>
+</style> -->
